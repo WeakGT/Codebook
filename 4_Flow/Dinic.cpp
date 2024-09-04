@@ -1,3 +1,6 @@
+// O(V^2 * E)
+// O(min(V^(2/3), E^(1/2)) * E) for unit graph (all cap are same)
+// O(E * sqrt(V)) for bipartite matching
 struct MaxFlow { // 0-base
   struct edge {
     int to, cap, flow, rev;
