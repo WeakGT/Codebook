@@ -1,3 +1,5 @@
+// O(n^3), where n is the number of vertices on one side of the bipartite graph
+// Finds the maximum weight matching in a bipartite graph
 struct KM { // 0-base
   int w[MAXN][MAXN], hl[MAXN], hr[MAXN], slk[MAXN], n;
   int fl[MAXN], fr[MAXN], pre[MAXN], qu[MAXN], ql, qr;
