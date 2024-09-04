@@ -1,56 +1,38 @@
-#include<bits/stdc++.h>
-using namespace std;
-const int maxn = 20 + 5;
-struct mat {
-    double a[maxn][maxn];
-    int n, m;
-};
-
-void gauss_elim(mat &A) {
-    for (int i = 0; i < A.n; i++) {
-        int id = i ;
-        for (int j = i + 1; j < A.n; j++)
-            if (fabs(A.a[j][i]) > fabs(A.a[id][i])) id = j ;
-        if (id != i)
-            for (int j = 0; j < A.m; j++) swap(A.a[i][j], A.a[id][j]) ;
-
-        for (int j = i + 1; j < A.n; j++)
-        {
-            double f = A.a[j][i] / A.a[i][i] ;
-            for (int k = i; k < A.m; k++)
-                A.a[j][k] -= A.a[i][k] * f ;
-        }
-    }
-
-    for (int i = A.n - 1; i >= 0; i--)
-    {
-        for (int j = i + 1; j < A.n; j++)
-            A.a[i][A.m - 1] -= A.a[j][A.m - 1] * A.a[i][j] ;
-        A.a[i][A.m - 1] /= A.a[i][i] ;
-    }
+using ll = long long;
+const ll mod = 998244353;
+ll fp(ll a, ll b) {
+  ll ret = 1;
+  for (; b; b >>= 1, a = a * a % mod)
+    if (b & 1) ret = ret * a % mod;
+  return ret;
 }
-
-mat A ;
-main()
-{
-    int T ; scanf("%d", &T) ;
-    while (T--)
-    {
-        int n ; scanf("%d", &n) ;
-        A.n = n ; A.m = n + 1 ;
-        for (int i = 0; i < n; i++) for (int j = 0; j < n + 1; j++)
-                A.a[i][j] = 0.0 ;
-        for (int i = 0; i < n; i++)
-        {
-            int k ; scanf("%d", &k) ;
-            while (k--)
-            {
-                int x ; scanf("%d", &x) ;
-                A.a[i][x] = 1.0 ;
-            }
-            scanf("%lf", &A.a[i][n]) ;
-        }
-        gauss_elim(A) ;
-        for (int i = 0; i < n; i++) printf("%d\n", int(A.a[i][n] + 0.5)) ;
+vector<ll> gauss_elimination(vector<vector<ll>>& a) { // n * (n+1)
+  // if a[i][j] < 0, a[i][j] += mod
+  int n = a.size();
+  bool swp = 0;
+  for (int i = 0; i < n; i++) {
+    for (int k = i; k < n; k++) {
+      if (a[i][i] == 0 && a[k][i] != 0) {
+        swap(a[i], a[k]), swp ^= 1; // det = -det
+        break;
+      }
     }
+    if (a[i][i] == 0) return {}; // 0
+    ll inv = fp(a[i][i], mod - 2);
+    for (int j = 0; j < n; j++) {
+      if (i != j) {
+        ll tmp = a[j][i] * inv % mod;
+        for (int k = i; k <= n; k++)
+          a[j][k] = (a[j][k] - tmp * a[i][k] % mod + mod) % mod;
+      }
+    }
+  }
+  // general solution
+  vector<ll> ans(n);
+  for (int i = 0; i < n; i++) ans[i] = a[i][n] * fp(a[i][i], mod - 2) % mod;
+  return ans;
+  // det
+  // ll ret = 1;
+  // for (int i = 0; i < n; i++) ret = ret * a[i][i] % mod;
+  // return swp ? mod - ret : ret;
 }
