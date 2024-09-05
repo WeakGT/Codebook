@@ -183,13 +183,9 @@ stringstyle=\itshape\color{Green4},
 \input{content.tex}
 
 \newpage
-\foreach \p in {1,2,3} { % 生成三頁
-    \begin{tikzpicture}[scale=1]
-        % 設定 A4 紙張大小並居中
-        \draw[step=0.5cm, gray] (-10.5, -14.85) grid (10.5, 14.85); % 設定細線網格
-        \draw[step=2.5cm, line width=0.7mm] (-10.5, -14.85) grid (10.5, 14.85); % 設定粗線網格
-    \end{tikzpicture}
-    \newpage % 生成新頁面
-}
+\begin{tikzpicture}[every node/.style={minimum size=1cm-\pgflinewidth, outer sep=10pt}, scale=2]
+    \draw[step=0.2cm,color=gray] (0,0) grid (9,13);
+    \draw[step=1cm,color=black,line width=0.4mm] (0,0) grid (9,13);
+\end{tikzpicture}
 
 \end{document}
