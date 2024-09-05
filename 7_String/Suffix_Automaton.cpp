@@ -1,3 +1,5 @@
+// O(n)
+// find all suffix substrings in lexicographical order
 #include <bits/stdc++.h>
 class SuffixAutomaton {
 public:
