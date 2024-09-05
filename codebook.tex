@@ -17,6 +17,7 @@
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{amsmath}
+\usepackage{tikz}
 \usepackage[CheckSingle, CJKmath]{xeCJK}
 \usepackage{savetrees}
 \usepackage{array}
@@ -172,9 +173,7 @@ stringstyle=\itshape\color{Green4},
 
 \textbf{
 \scriptsize
-\begin{multicols}{2}
-  \tableofcontents
-\end{multicols}
+\tableofcontents
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -182,5 +181,15 @@ stringstyle=\itshape\color{Green4},
 
 \footnotesize
 \input{content.tex}
+
+\newpage
+\foreach \p in {1,2,3} { % 生成三頁
+    \begin{tikzpicture}[scale=1]
+        % 設定 A4 紙張大小並居中
+        \draw[step=0.5cm, gray] (-10.5, -14.85) grid (10.5, 14.85); % 設定細線網格
+        \draw[step=2.5cm, line width=0.7mm] (-10.5, -14.85) grid (10.5, 14.85); % 設定粗線網格
+    \end{tikzpicture}
+    \newpage % 生成新頁面
+}
 
 \end{document}
