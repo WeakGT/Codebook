@@ -5,6 +5,7 @@
 \usepackage{amsthm}								%定義，例題
 \usepackage{amssymb}
 %\usepackage[margin=2cm]{geometry}
+%\usepackage[margin=2cm]{geometry}
 \usepackage{fontspec}								%設定字體
 \usepackage{color}
 \usepackage[x11names]{xcolor}
@@ -16,6 +17,7 @@
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{amsmath}
+\usepackage{tikz}
 \usepackage[CheckSingle, CJKmath]{xeCJK}
 \usepackage{savetrees}
 \usepackage{array}
@@ -47,8 +49,19 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setmainfont{Ubuntu}				%主要字型
-\setmonofont{Ubuntu Mono}
+\setmainfont [				%主要字型
+    Path = .fonts/ttf/,
+    UprightFont = *-R,
+    BoldFont = *-B,
+    ItalicFont = *-RI
+  ] {Ubuntu}
+
+\setmonofont [        
+    Path = .fonts/ttf/,
+    UprightFont = *-R
+  ] {UbuntuMono}
+% \setmainfont{.fonts/ttf/Ubuntu-R.ttf}				%主要字型
+% \setmonofont{.fonts/ttf/UbuntuMono-R.ttf}
 \XeTeXlinebreaklocale "zh"						%中文自動換行
 \XeTeXlinebreakskip = 0pt plus 1pt				%設定段落之間的距離
 \setcounter{secnumdepth}{3}						%目錄顯示第三層
@@ -154,21 +167,29 @@ stringstyle=\itshape\color{Green4},
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\contentsname}{Contents} 
 \newcommand{\inputcode}[2]{
-    \subsection[#1]{#1 \footnotesize{[\texttt{\captureshell{cpp #2 -dD -P -fpreprocessed | tr -d '[:space:]' | md5sum | cut -c-6}}]}}
+    \subsection[#1]{#1}
     \lstinputlisting{#2}
 }
 
 \textbf{
 \scriptsize
-\begin{multicols}{2}
-  \tableofcontents
-\end{multicols}
+\tableofcontents
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\newpage
+% \newpage
 
 \footnotesize
 \input{content.tex}
+
+\newpage
+\foreach \p in {1,2,3} { % 生成三頁
+    \begin{tikzpicture}[scale=1]
+        % 設定 A4 紙張大小並居中
+        \draw[step=0.5cm, gray] (-10.5, -14.85) grid (10.5, 14.85); % 設定細線網格
+        \draw[step=2.5cm, line width=0.7mm] (-10.5, -14.85) grid (10.5, 14.85); % 設定粗線網格
+    \end{tikzpicture}
+    \newpage % 生成新頁面
+}
 
 \end{document}
