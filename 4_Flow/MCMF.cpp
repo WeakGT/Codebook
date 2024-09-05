@@ -1,6 +1,7 @@
+// O(FE * logV), where F is the maximum flow,  E is edges, and V is vertices.
 struct MinCostMaxFlow { // 0-base
   struct Edge {
-    ll from, to, cap, flow, cost, rev; 
+    ll from, to, cap, flow, cost, rev;
   } *past[N];
   vector<Edge> G[N];
   int inq[N], n, s, t;
@@ -8,7 +9,7 @@ struct MinCostMaxFlow { // 0-base
   bool BellmanFord() {
     fill_n(dis, n, INF), fill_n(inq, n, 0);
     queue<int> q;
-    auto relax = [&](int u, ll d, ll cap, Edge *e) {
+    auto relax = [&](int u, ll d, ll cap, Edge * e) {
       if (cap > 0 && dis[u] > d) {
         dis[u] = d, up[u] = cap, past[u] = e;
         if (!inq[u]) inq[u] = 1, q.push(u);

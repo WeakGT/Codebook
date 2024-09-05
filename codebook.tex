@@ -5,6 +5,7 @@
 \usepackage{amsthm}								%定義，例題
 \usepackage{amssymb}
 %\usepackage[margin=2cm]{geometry}
+%\usepackage[margin=2cm]{geometry}
 \usepackage{fontspec}								%設定字體
 \usepackage{color}
 \usepackage[x11names]{xcolor}
@@ -156,12 +157,11 @@ stringstyle=\itshape\color{Green4},
 \cs_generate_variant:Nn \sdaau_captureshell:Nn { Ne }
 \ExplSyntaxOff
 
-
 \begin{document}
 \pagestyle{fancy}
 \fancyfoot{}
 %\fancyfoot[R]{\includegraphics[width=20pt]{ironwood.jpg}}
-\fancyhead[L]{National Tsing Hua University GeomeTrick}
+\fancyhead[L]{National Tsing Hua University Kenapsack}
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\contentsname}{Contents} 
@@ -170,8 +170,12 @@ stringstyle=\itshape\color{Green4},
     \lstinputlisting{#2}
 }
 
+\textbf{
 \scriptsize
-\tableofcontents
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \newpage
